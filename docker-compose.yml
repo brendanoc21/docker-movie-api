@@ -26,12 +26,17 @@ services:
     container_name: mongoDB
     image: mongo:8.0-rc
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGODB_URI=
+      - REDIS_URI=
+      - ENABLE_WRITING_HANDLERS=false
     networks:
        - movie-network
     volumes:
        - moviedata:/data/db   
+
+  cache:
+    container_name: redis
+    image: redis:alpine
 
   mongo-express:
     container_name: express
