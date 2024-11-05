@@ -10,7 +10,9 @@ This repository contains the containerization of the mukti-container application
 
 ### Database Seeding.
 
-[Briefly explain how you automated the seeding of the application's database.]
+- I added a new service called "seeding" that uses the same mongo image as the database.
+- I used the command field to do a mongoimport.
+- I used a bind mount to attach the seeding.json to the container.
 
 ### Multi-Stack.
 

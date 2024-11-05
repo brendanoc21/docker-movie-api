@@ -16,7 +16,7 @@ services:
       - REDIS_URI=redis://cache
       - ENABLE_WRITING_HANDLERS=false
     networks:
-       - movie-network
+      - movie-network
     depends_on:
       - database
       - cache
@@ -28,9 +28,29 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=secret
     networks:
-       - movie-network
+      - movie-network
     volumes:
-       - moviedata:/data/db   
+      - moviedata:/data/db
+    
+  # https://stackoverflow.com/questions/30063907/docker-compose-how-to-execute-multiple-commands
+  # https://www.mongodb.com/docs/database-tools/mongoimport/
+  # https://docs.docker.com/get-started/docker-concepts/running-containers/sharing-local-files/#:~:text=If%20you%20have%20specific%20files,host%20and%20container%20for%20sharing.
+  # https://docs.docker.com/engine/storage/bind-mounts/#use-a-bind-mount-with-compose
+  # https://stackoverflow.com/questions/68927857/mongoexport-auth-error-using-mechanism-scram-sha-1
+  # https://stackoverflow.com/questions/46796544/mongoimport-results-in-no-collection-specified-despite-having-collection-defin
+
+  seeding:
+    container_name: seed
+    image: mongo:8.0-rc
+    networks:
+      - movie-network
+    command: mongoimport --authenticationDatabase=admin --db tmdb_movies --collection movies --jsonArray --username admin --password secret mongodb://admin:secret@database:27017 seeding.json
+    depends_on:
+      - database
+    volumes:
+      - type: bind
+        source: ./seeding.json
+        target: /seeding.json
 
   cache:
     container_name: redis
@@ -49,6 +69,6 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=secret
       - ME_CONFIG_MONGODB_URL=mongodb://admin:secret@database:27017/
     networks:
-       - movie-network
+      - movie-network
     depends_on:
       - database
