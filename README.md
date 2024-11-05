@@ -16,8 +16,8 @@ This repository contains the containerization of the mukti-container application
 
 ### Multi-Stack.
 
-[Briefly explain how you support building development and production stack options.]
+- I added a profile to the database seeding
 
 ### Extra.
 
-- Installed ping utility on running mongo container to check isolation.
+- I installed ping utility on running mongo container to check isolation.

@@ -58,6 +58,7 @@ services:
       - type: bind
         source: ./seeding.json
         target: /seeding.json
+    profiles: [seeding]
 
   cache:
     container_name: redis
