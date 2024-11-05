@@ -15,13 +15,14 @@ services:
     ports:
       - '9000:9000'
     environment:
-      - MONGODB_URI=mongodb://admin:pass@database:27017
+      - MONGODB_URI=mongodb://admin:secret@database:27017
       - REDIS_URI=redis://cache
       - ENABLE_WRITING_HANDLERS=false
     networks:
        - movie-network
     depends_on:
       - database
+      - cache
   
   database:
     container_name: mongoDB
@@ -37,6 +38,8 @@ services:
   cache:
     container_name: redis
     image: redis:alpine
+    networks:
+      - movie-network
 
   mongo-express:
     container_name: express
