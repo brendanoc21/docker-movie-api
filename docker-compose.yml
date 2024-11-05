@@ -1,5 +1,9 @@
 networks:
-  movie-network:
+  api-redis-network:
+  api-database-network:
+  express-database-network:
+  seeding-database-network:
+
 
 volumes:
   moviedata:
@@ -16,7 +20,8 @@ services:
       - REDIS_URI=redis://cache
       - ENABLE_WRITING_HANDLERS=false
     networks:
-      - movie-network
+      - api-redis-network
+      - api-database-network
     depends_on:
       - database
       - cache
@@ -28,7 +33,9 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=secret
     networks:
-      - movie-network
+      - api-database-network
+      - express-database-network
+      - seeding-database-network
     volumes:
       - moviedata:/data/db
     
@@ -43,7 +50,7 @@ services:
     container_name: seed
     image: mongo:8.0-rc
     networks:
-      - movie-network
+      - seeding-database-network
     command: mongoimport --authenticationDatabase=admin --db tmdb_movies --collection movies --jsonArray --username admin --password secret mongodb://admin:secret@database:27017 seeding.json
     depends_on:
       - database
@@ -56,7 +63,7 @@ services:
     container_name: redis
     image: redis:alpine
     networks:
-      - movie-network
+      - api-redis-network
 
   mongo-express:
     container_name: express
@@ -69,6 +76,6 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=secret
       - ME_CONFIG_MONGODB_URL=mongodb://admin:secret@database:27017/
     networks:
-      - movie-network
+      - express-database-network
     depends_on:
       - database
