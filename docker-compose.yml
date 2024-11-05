@@ -58,7 +58,7 @@ services:
       - type: bind
         source: ./seeding.json
         target: /seeding.json
-    profiles: [seeding]
+    profiles: [development]
 
   cache:
     container_name: redis
@@ -80,3 +80,4 @@ services:
       - express-database-network
     depends_on:
       - database
+    profiles: [development]

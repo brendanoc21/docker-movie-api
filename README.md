@@ -16,7 +16,7 @@ This repository contains the containerization of the mukti-container application
 
 ### Multi-Stack.
 
-- I added a profile to the database seeding
+- I added a compose profile to the database seeding and the express web app
 
 ### Extra.
 
