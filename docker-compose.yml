@@ -51,7 +51,7 @@ services:
     image: mongo:8.0-rc
     networks:
       - seeding-database-network
-    command: mongoimport --authenticationDatabase=admin --db tmdb_movies --collection movies --jsonArray --username admin --password secret mongodb://admin:secret@database:27017 seeding.json
+    command: mongoimport --authenticationDatabase=admin --db tmdb_movies --collection movies --jsonArray --drop --username admin --password secret mongodb://admin:secret@database:27017 seeding.json
     depends_on:
       - database
     volumes:
