@@ -15,8 +15,9 @@ services:
     ports:
       - '9000:9000'
     environment:
-      - MONGO_PASS=secret
-      - MONGO_HOST=database 
+      - MONGODB_URI=mongodb://admin:pass@database:27017
+      - REDIS_URI=redis://cache
+      - ENABLE_WRITING_HANDLERS=false
     networks:
        - movie-network
     depends_on:
@@ -26,9 +27,8 @@ services:
     container_name: mongoDB
     image: mongo:8.0-rc
     environment:
-      - MONGODB_URI=
-      - REDIS_URI=
-      - ENABLE_WRITING_HANDLERS=false
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
     networks:
        - movie-network
     volumes:
@@ -47,7 +47,7 @@ services:
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
       - ME_CONFIG_MONGODB_ADMINPASSWORD=secret
-      - ME_CONFIG_MONGODB_SERVER=database
+      - ME_CONFIG_MONGODB_URL=mongodb://admin:secret@database:27017/
     networks:
        - movie-network
     depends_on:
