@@ -1,8 +1,5 @@
-version: '3'
 networks:
-   movie-network:
-       external: true
-       name: 'mongo-network'
+  movie-network:
 
 volumes:
   moviedata:
