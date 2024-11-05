@@ -1,4 +1,17 @@
-## Agile Software Practice - Assignment 1.
+## Docker Assignment - Agile Software Practice.
 
-1. Recreated the compose.yaml file from the lab work and brought that into the new docker-compose.yml
-2. Added cache and the basis for the environment variables
+__Name:__ Brendan O'Connor
+
+__Demo:__ .... The link to your YouTube demonstration ....
+
+This repository contains the containerization of the mukti-container application illustrated below.
+
+![](./images/arch.png)
+
+### Database Seeding.
+
+[Briefly explain how you automated the seeding of the application's database.]
+
+### Multi-Stack.
+
+[Briefly explain how you support building development and production stack options.]
