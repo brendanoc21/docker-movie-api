@@ -16,8 +16,10 @@ This repository contains the containerization of the mukti-container application
 
 ### Multi-Stack.
 
-- I added a compose profile to the database seeding and the express web app
+- I added a compose profile to the database seeding and the express web app.
+- When not using the development profile seed and express will not start up.
 
 ### Extra.
 
 - I installed ping utility on running mongo container to check isolation.
+- I had some troubles which I got answers to online, I included sources for them in comments
