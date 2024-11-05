@@ -22,4 +22,4 @@ This repository contains the containerization of the mukti-container application
 ### Extra.
 
 - I installed ping utility on running mongo container to check isolation.
-- I had some troubles which I got answers to online, I included sources for them in comments
+- I had some troubles which I got answers to online, I included sources for them in comments.
